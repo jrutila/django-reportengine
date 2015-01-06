@@ -4,7 +4,10 @@ Django JSON Field.  This extends Django Model Fields to store JSON as a field-ty
 #TODO - Move this to utils or another application.  This is tangential to reporting and useful for other things.
 
 from django.db import models
-from django.utils import simplejson
+try:
+    import json as simplejson
+except ImportError:
+    from django.utils import simplejson
 from django.core.serializers.json import DjangoJSONEncoder
 
 import logging
