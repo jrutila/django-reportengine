@@ -63,7 +63,7 @@ class Command(BaseCommand):
         reportengine.autodiscover() ## Populate the reportengine registry
         try:
             report = reportengine.get_report(kwargs['namespace'], kwargs['report'])()
-        except Exception, err:
+        except Exception as err:
             raise CommandError('Could not find report for (%(namespace)s, %(report)s)' % kwargs)
 
 

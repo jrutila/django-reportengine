@@ -4,8 +4,8 @@ from django.db.models import Q
 import datetime
 import reportengine
 
-from jsonfield import JSONField
-from settings import STALE_REPORT_SECONDS
+from .jsonfield import JSONField
+from .settings import STALE_REPORT_SECONDS
 
 class AbstractScheduledTask(models.Model):
     """
@@ -121,7 +121,7 @@ class ReportRequest(AbstractScheduledTask):
         #reportengine.autodiscover() ## Populate the reportengine registry
         try:
             report = self.get_report()
-        except Exception, err:
+        except Exception as err:
             raise err  
         
         filter_form = report.get_filter_form(kwargs)

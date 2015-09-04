@@ -1,5 +1,5 @@
 import imp
-from base import Report,ModelReport,QuerySetReport,SQLReport,DateSQLReport
+from .base import Report,ModelReport,QuerySetReport,SQLReport,DateSQLReport
 
 # TODO  make this seperate from vitalik's registry methods
 _registry = {}

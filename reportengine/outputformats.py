@@ -2,9 +2,8 @@ from django.core.exceptions import ImproperlyConfigured
 from django.shortcuts import render_to_response
 from django.template.context import RequestContext
 from django.http import HttpResponse
-from django.utils.encoding import smart_unicode
 import csv
-from cStringIO import StringIO
+import io
 from xml.etree import ElementTree as ET
 
 ## Exporting to XLS requires the xlwt library

@@ -300,7 +300,7 @@ class ReportExportView(TemplateView, RequestReportMixin):
                   "report":self.report,
                   'title':self.report.verbose_name,
                   'format':self.kwargs['output'],}
-            print cx
+            print(cx)
             return render_to_response("reportengine/async_wait.html",
                                       cx,
                                       context_instance=RequestContext(self.request))

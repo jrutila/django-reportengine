@@ -6,8 +6,8 @@ report that can be done in the backend).
 """
 from django import forms
 from django.db.models.fields.related import RelatedField
-from filtercontrols import *
-from outputformats import *
+from .filtercontrols import *
+from .outputformats import *
 import datetime
 
 # Pulled from vitalik's Django-reporting
