@@ -1,4 +1,4 @@
-from settings import ASYNC_REPORTS, MAX_ROWS_FOR_QUICK_EXPORT
+from urllib.parse import urlencode
 
 from django.shortcuts import render_to_response,redirect
 from django.template.context import RequestContext
@@ -11,8 +11,8 @@ from django.views.decorators.cache import never_cache
 
 import reportengine
 from reportengine.models import ReportRequest, ReportRequestExport
-from urllib import urlencode
 import datetime,calendar,hashlib
+from reportengine.settings import ASYNC_REPORTS, MAX_ROWS_FOR_QUICK_EXPORT
 
 def next_month(d):
     """helper to get next month"""
@@ -90,7 +90,7 @@ class RequestReportView(TemplateView, RequestReportMixin):
         namespace = self.kwargs.get('namespace', self.request.POST.get('namespace'))
         slug = self.kwargs.get('slug', self.request.POST.get('slug'))
         token_params = [str(datetime.datetime.now()), namespace, slug, urlencode(report_params)]
-        token = hashlib.md5("|".join(token_params)).hexdigest()
+        token = hashlib.md5("|".join(token_params).encode('utf-8')).hexdigest()
         rr = ReportRequest(token=token,
                            namespace=namespace,
                            slug=slug,
@@ -176,7 +176,7 @@ class ReportView(ListView, RequestReportMixin):
         page = p.number
         rows = p.object_list
         order_by = None #TODO
-        params = dict(self.request.GET.iteritems())
+        params = dict(self.request.GET.items())
 
         # HACK: fill up a fake ChangeList object to use the admin paginator
         class MiniChangeList:
