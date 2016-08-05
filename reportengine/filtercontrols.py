@@ -13,7 +13,7 @@ because multiple controls may be appropriate for a particular field.
 from django import forms
 from django.db import models
 from django.utils.translation import ugettext as _
-from django.utils.datastructures import SortedDict
+from collections import OrderedDict as SortedDict
 
 # TODO build register and lookup functions
 # TODO figure out how to manage filters and actual request params, which aren't always 1-to-1 (e.g. datetime)
