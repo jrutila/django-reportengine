@@ -1,5 +1,3 @@
-from urllib.parse import urlencode
-
 from django.shortcuts import render_to_response,redirect
 from django.template.context import RequestContext
 from django.contrib.auth.decorators import permission_required
@@ -11,6 +9,7 @@ from django.views.decorators.cache import never_cache
 
 import reportengine
 from reportengine.models import ReportRequest, ReportRequestExport
+from urllib import urlencode
 import datetime,calendar,hashlib
 from reportengine.settings import ASYNC_REPORTS, MAX_ROWS_FOR_QUICK_EXPORT
 
