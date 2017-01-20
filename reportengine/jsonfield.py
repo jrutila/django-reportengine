@@ -40,7 +40,7 @@ class JSONFieldDescriptor(object):
         return getattr(instance, self.field.get_cache_name())
 
     def __set__(self, instance, value):
-        if not isinstance(value, (self.datatype, str)):
+        if not isinstance(value, (self.datatype, basestring)):
             value = self.datatype(value)
         instance.__dict__[self.field.attname] = value
         try:
@@ -108,7 +108,7 @@ class JSONField(models.TextField):
         return self.field.value_from_object(model_instance)
 
     def get_db_prep_save(self, value, *args, **kwargs):
-        if not isinstance(value, str):
+        if not isinstance(value, basestring):
             value = self.dumps(value)
 
         return super(JSONField, self).get_db_prep_save(value, *args, **kwargs)
@@ -140,7 +140,7 @@ class JSONField(models.TextField):
 
             # XXX We need to investigate why this is happening once we have
             # a solid repro case.
-            if isinstance(val, str):
+            if isinstance(val, basestring):
                 logging.warning("JSONField decode error. Expected dictionary, "
                                 "got string for input '%s'" % val)
                 # For whatever reason, we may have gotten back
